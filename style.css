@@ -1,0 +1,248 @@
+/* ========== المتغيرات (الألوان والخطوط في مكان واحد) ========== */
+:root {
+  --ink: #14181a;       /* لون الكلام الأساسي */
+  --paper: #f2f5f4;     /* خلفية الصفحة */
+  --muted: #566064;     /* كلام أهدى */
+  --wa: #25d366;        /* أخضر واتساب */
+
+  --font-head: "Readex Pro", sans-serif;
+  --font-body: "IBM Plex Sans Arabic", sans-serif;
+}
+
+/* ========== إعدادات عامة ========== */
+* {
+  box-sizing: border-box; /* العرض يشمل الـ padding، وده بيسهّل الحسابات */
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.9;
+}
+
+h1, h2 {
+  font-family: var(--font-head);
+  line-height: 1.35;
+}
+
+a { color: inherit; }
+
+/* الأكسسيبيليتي: إطار واضح لما حد يتنقل بالكيبورد */
+a:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ========== الهيدر ========== */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin-inline: auto; /* معناها: هامش يمين وشمال تلقائي (يوسّط) */
+  padding: 20px 24px;
+}
+.topbar__role {
+  font-weight: 400;
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+
+.topbar__name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.topbar__link {
+  font-weight: 500;
+}
+
+/* ========== الأزرار ========== */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.btn:hover { opacity: 0.85; }
+
+.btn--dark { background: var(--ink); color: #fff; }
+.btn--wa   { background: var(--wa);  color: #0b2e18; }
+
+/* ========== Hero ========== */
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr; /* العمود الأول أكبر من التاني */
+  align-items: center;
+  gap: 48px;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 72px 24px 88px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem); /* حجم بيتغير حسب الشاشة */
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+}
+
+/* التلات دواير المتداخلة */
+.hero__dots {
+  position: relative;
+  height: 340px;
+}
+
+.dot {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+}
+
+.dot--noor  { background: #0f3d33; top: 0;    inset-inline-start: 10%; }
+.dot--noir  { background: #111111; top: 90px; inset-inline-start: 40%; }
+.dot--hijab { background: #E90B8C; top: 120px; inset-inline-start: 0;   mix-blend-mode: multiply; }
+
+/* ========== المشاريع ========== */
+.project {
+  background: var(--bg);  /* القيم دي جاية من style="--bg:..." في الـ HTML */
+  color: var(--fg);
+  padding: 72px 24px;
+}
+
+.project__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 56px;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+/* المشروع الزوجي: الصورة تتنقل للناحية التانية */
+.project:nth-of-type(even) .shot { order: 2; }
+
+.project h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin-bottom: 16px;
+}
+
+.project p {
+  max-width: 44ch;
+  margin-bottom: 28px;
+  opacity: 0.9;
+}
+
+/* إطار لقطة الشاشة */
+.shot {
+  position: relative;
+  aspect-ratio: 4 / 5;   /* نسبة العرض للطول */
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+}
+
+.shot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* الصورة تملا الإطار من غير ما تتمطط */
+  object-position: top;   /* نبدأ من أعلى الصفحة */
+}
+
+/* الكلام اللي بيظهر لو الصورة لسه مش موجودة */
+.shot__label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+/* ========== اللي هتاخده ========== */
+.offer {
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 88px 24px;
+}
+
+.offer h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 24px;
+}
+
+.offer ul {
+  padding-inline-start: 1.2rem;
+  margin-bottom: 28px;
+}
+
+.offer li { margin-bottom: 8px; }
+
+.offer__price { color: var(--muted); }
+.offer__price strong { color: var(--ink); }
+
+/* ========== التواصل ========== */
+.contact {
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.contact h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: 12px;
+}
+
+.contact p {
+  max-width: 44ch;
+  margin: 0 auto 28px;
+  opacity: 0.8;
+}
+
+/* ========== الفوتر ========== */
+.footer {
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ========== الموبايل (شاشات أصغر من 800px) ========== */
+@media (max-width: 800px) {
+  .hero,
+  .project__inner {
+    grid-template-columns: 1fr; /* عمود واحد */
+    gap: 32px;
+  }
+
+  .hero { padding: 40px 24px 56px; }
+  .hero__dots { height: 260px; order: -1; } /* الدواير فوق الكلام */
+  .dot { width: 160px; height: 160px; }
+  .dot--noir  { top: 70px; }
+  .dot--hijab { top: 90px; }
+
+  .project { padding: 56px 24px; }
+  .project:nth-of-type(even) .shot { order: 0; }
+}
